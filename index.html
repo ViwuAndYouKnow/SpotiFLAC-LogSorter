@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpotiFLAC Log Sorter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>SpotiFLAC Log Sorter</h1>
+      <p class="subtitle">
+        Pick your log files and get a clean list of failed Spotify links plus any error-only entries.
+      </p>
+
+      <div class="upload-panel" id="uploadPanel">
+        <div class="upload-icon">⬆</div>
+        <h2>Choose log files</h2>
+        <p>Drag and drop your .txt logs here, or use the button.</p>
+        <label class="upload-button" for="fileInput">Choose files</label>
+        <input id="fileInput" type="file" multiple accept=".txt,text/plain" />
+      </div>
+
+
+
+      <section class="results">
+        <h2>Summary</h2>
+        <div id="summary">No folder selected yet.</div>
+      </section>
+
+      <section class="results">
+        <h2>Output preview</h2>
+        <textarea id="outputBox" readonly placeholder="Generated links and error-only entries will appear here."></textarea>
+      </section>
+
+      <div class="actions">
+        <button id="downloadLinksBtn" type="button" class="download-button" disabled>
+          Download Log
+        </button>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
