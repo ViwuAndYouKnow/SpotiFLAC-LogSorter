@@ -161,20 +161,7 @@ if (typeof window !== 'undefined') {
   const state = {
     links: [],
     errorOnly: [],
-    fileKeys: new Set(),
-    selectedFiles: [],
   };
-
-  function resetState() {
-    state.links = [];
-    state.errorOnly = [];
-    state.fileKeys.clear();
-    state.selectedFiles = [];
-    renderSummary();
-    buildOutputPreview();
-    document.getElementById('downloadLinksBtn').disabled = true;
-    if (fileInput) fileInput.value = '';
-  }
 
   function setStatus(message) {
     const summaryEl = document.getElementById('summary');
@@ -227,33 +214,22 @@ if (typeof window !== 'undefined') {
   }
 
   async function processSelectedFiles(fileList) {
-    const newFiles = [];
+    const textFileMaps = [];
     for (const file of [...fileList || []]) {
-      if (!file.name.toLowerCase().endsWith('.txt')) continue;
-
-      const key = `${file.name}-${file.size}-${file.lastModified}`;
-      if (state.fileKeys.has(key)) continue;
-
-      state.fileKeys.add(key);
-      state.selectedFiles.push(file);
-      newFiles.push(file);
+      if (file.name.toLowerCase().endsWith('.txt')) {
+        const text = await file.text();
+        textFileMaps.push({ name: file.name, text });
+      }
     }
 
-    if (!newFiles.length) {
-      setStatus('No new .txt log files were added.');
+    if (!textFileMaps.length) {
+      setStatus('No .txt log files were found in the selection.');
       return;
     }
 
-    const textFileMaps = [];
-    for (const file of newFiles) {
-      const text = await file.text();
-      textFileMaps.push({ name: file.name, text });
-    }
-
     const combined = { links: [], errorOnly: [] };
-    for (const file of state.selectedFiles) {
-      const text = await file.text();
-      const parsed = parseLogText(text);
+    for (const entry of textFileMaps) {
+      const parsed = parseLogText(entry.text);
       combined.links.push(...parsed.links);
       combined.errorOnly.push(...parsed.errorOnly);
     }
@@ -317,12 +293,6 @@ if (typeof window !== 'undefined') {
   }
 
   fileInput.addEventListener('change', handleFileSelect);
-
-  document.getElementById('clearBtn').addEventListener('click', () => {
-    resetState();
-    setStatus('No folder selected yet.');
-    document.getElementById('outputBox').value = '';
-  });
 
   document.getElementById('downloadLinksBtn').addEventListener('click', () => {
     if (!state.links.length && !state.errorOnly.length) return;
