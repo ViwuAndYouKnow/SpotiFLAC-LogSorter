@@ -16,7 +16,7 @@ It then combines everything into a single, easy-to-use output.
 
 ## 🚀 How to use
 
-1. Open **SpotiFLAC-LogSorter**.
+1. Open **[SpotiFLAC-LogSorter](https://viwuandyouknow.github.io/SpotiFLAC-LogSorter)**.
 2. Drag and drop your SpotiFLAC `.txt` log files into the page, or use **Choose files**.
 3. Copy/Download the generated list.
 4. Paste the Spotify links into a brand new playlist.
@@ -24,6 +24,5 @@ It then combines everything into a single, easy-to-use output.
 
 And that's it, no need to be manually be opening 69 log files and hunting for the one song that failed. 👍
 
-### 🌐 Use it here: **[Open SpotiFLAC-LogSorter](https://viwuandyouknow.github.io/SpotiFLAC-LogSorter/)**
 ---
 ** Vibecoded with small manual tweaks to make sure certain functions works because im too lazy.
