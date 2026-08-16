@@ -161,7 +161,18 @@ if (typeof window !== 'undefined') {
   const state = {
     links: [],
     errorOnly: [],
+    fileKeys: new Set(),
   };
+
+  function resetState() {
+    state.links = [];
+    state.errorOnly = [];
+    state.fileKeys.clear();
+    renderSummary();
+    buildOutputPreview();
+    document.getElementById('downloadLinksBtn').disabled = true;
+    if (fileInput) fileInput.value = '';
+  }
 
   function setStatus(message) {
     const summaryEl = document.getElementById('summary');
@@ -214,20 +225,29 @@ if (typeof window !== 'undefined') {
   }
 
   async function processSelectedFiles(fileList) {
-    const textFileMaps = [];
+    const newFiles = [];
     for (const file of [...fileList || []]) {
-      if (file.name.toLowerCase().endsWith('.txt')) {
-        const text = await file.text();
-        textFileMaps.push({ name: file.name, text });
-      }
+      if (!file.name.toLowerCase().endsWith('.txt')) continue;
+
+      const key = `${file.name}-${file.size}-${file.lastModified}`;
+      if (state.fileKeys.has(key)) continue;
+
+      state.fileKeys.add(key);
+      newFiles.push(file);
     }
 
-    if (!textFileMaps.length) {
-      setStatus('No .txt log files were found in the selection.');
+    if (!newFiles.length) {
+      setStatus('No new .txt log files were added.');
       return;
     }
 
-    const combined = { links: [], errorOnly: [] };
+    const textFileMaps = [];
+    for (const file of newFiles) {
+      const text = await file.text();
+      textFileMaps.push({ name: file.name, text });
+    }
+
+    const combined = { links: [...state.links], errorOnly: [...state.errorOnly] };
     for (const entry of textFileMaps) {
       const parsed = parseLogText(entry.text);
       combined.links.push(...parsed.links);
@@ -293,6 +313,11 @@ if (typeof window !== 'undefined') {
   }
 
   fileInput.addEventListener('change', handleFileSelect);
+
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    resetState();
+    setStatus('No folder selected yet.');
+  });
 
   document.getElementById('downloadLinksBtn').addEventListener('click', () => {
     if (!state.links.length && !state.errorOnly.length) return;

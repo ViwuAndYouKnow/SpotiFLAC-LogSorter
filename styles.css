@@ -122,6 +122,7 @@ input[type="file"] {
 .actions {
   display: flex;
   justify-content: center;
+  gap: 12px;
   margin-top: 18px;
   margin-bottom: 6px;
 }
@@ -135,6 +136,12 @@ button {
   cursor: pointer;
   color: var(--text);
   background: rgba(62, 166, 255, 0.08);
+}
+
+.clear-button {
+  min-width: 90px;
+  background: rgba(22, 27, 34, 0.86);
+  border: 1px solid var(--border);
 }
 
 .download-button {
