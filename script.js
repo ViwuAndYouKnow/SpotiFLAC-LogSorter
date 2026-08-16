@@ -162,12 +162,14 @@ if (typeof window !== 'undefined') {
     links: [],
     errorOnly: [],
     fileKeys: new Set(),
+    selectedFiles: [],
   };
 
   function resetState() {
     state.links = [];
     state.errorOnly = [];
     state.fileKeys.clear();
+    state.selectedFiles = [];
     renderSummary();
     buildOutputPreview();
     document.getElementById('downloadLinksBtn').disabled = true;
@@ -233,6 +235,7 @@ if (typeof window !== 'undefined') {
       if (state.fileKeys.has(key)) continue;
 
       state.fileKeys.add(key);
+      state.selectedFiles.push(file);
       newFiles.push(file);
     }
 
@@ -247,9 +250,10 @@ if (typeof window !== 'undefined') {
       textFileMaps.push({ name: file.name, text });
     }
 
-    const combined = { links: [...state.links], errorOnly: [...state.errorOnly] };
-    for (const entry of textFileMaps) {
-      const parsed = parseLogText(entry.text);
+    const combined = { links: [], errorOnly: [] };
+    for (const file of state.selectedFiles) {
+      const text = await file.text();
+      const parsed = parseLogText(text);
       combined.links.push(...parsed.links);
       combined.errorOnly.push(...parsed.errorOnly);
     }
@@ -317,6 +321,7 @@ if (typeof window !== 'undefined') {
   document.getElementById('clearBtn').addEventListener('click', () => {
     resetState();
     setStatus('No folder selected yet.');
+    document.getElementById('outputBox').value = '';
   });
 
   document.getElementById('downloadLinksBtn').addEventListener('click', () => {
