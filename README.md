@@ -22,16 +22,8 @@ It then combines everything into a single, easy-to-use output.
 4. Paste the Spotify links into a brand new playlist.
 5. Retry downloading the failed tracks.
 
-And that's it. No need to be manually opening 69 log files and hunting for the one song that failed. 👍
+And that's it, no need to be manually be opening 69 log files and hunting for the one song that failed. 👍
 
 ### 🌐 Use it here: **[Open SpotiFLAC-LogSorter](https://viwuandyouknow.github.io/SpotiFLAC-LogSorter/)**
-
-## 💡 Why?
-
-I made this for myself because I was too lazy to manually go through every log file looking for failed downloads.
-The goal is simply to make retrying failed downloads less annoying.
 ---
-
-Made because manually searching through SpotiFLAC is tedious, annoying and a waste of time, so i simplified it.
-
-** Vibecoded with small manual tweaks to make sure it works. **
+** Vibecoded with small manual tweaks to make sure certain functions works because im too lazy.
