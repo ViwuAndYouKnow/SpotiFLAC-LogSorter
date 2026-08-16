@@ -1,9 +1,37 @@
 # SpotiFLAC-LogSorter
-Sorts all SpotiFLAC failed entries into a single list of links so you dont have to manually go through each invidual error log and look for the failed entries.
 
-Vibecoded but it works because i was too lazy to even bother.
-I made this to help myself easily create a new playlist with all failed songs and save the burdon of manually going thrugh each inividual file and look for failed entires, and allow easier re-download attempts
-once the list is created you just copy paste it into a spotify playlist and bobs-your-uncle.
+A simple site for collecting failed **SpotiFLAC** download entries from multiple log files into one clean list of Spotify links.
+because manually digging through every individual error log to find failed songs is a pain in the a**.
+
+## ✨ What it does
+
+SpotiFLAC-LogSorter scans your SpotiFLAC `.txt` log files and extracts:
+
+*  Failed download entries
+*  Spotify links associated with failed entries
+*  Error-only entries that may not contain a Spotify link
+
+It then combines everything into a single, easy-to-use output.
 
 
-You can use this here: [https://viwuandyouknow.github.io/spotiflac-logSorter/](https://viwuandyouknow.github.io/SpotiFLAC-LogSorter/)
+## 🚀 How to use
+
+1. Open **SpotiFLAC-LogSorter**.
+2. Drag and drop your SpotiFLAC `.txt` log files into the page, or use **Choose files**.
+3. Copy/Download the generated list.
+4. Paste the Spotify links into a brand new playlist.
+5. Retry downloading the failed tracks.
+
+And that's it. No need to be manually opening 69 log files and hunting for the one song that failed. 👍
+
+### 🌐 Use it here: **[Open SpotiFLAC-LogSorter](https://viwuandyouknow.github.io/SpotiFLAC-LogSorter/)**
+
+## 💡 Why?
+
+I made this for myself because I was too lazy to manually go through every log file looking for failed downloads.
+The goal is simply to make retrying failed downloads less annoying.
+---
+
+Made because manually searching through SpotiFLAC is tedious, annoying and a waste of time, so i simplified it.
+
+** Vibecoded with small manual tweaks to make sure it works. **
